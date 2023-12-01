@@ -1,0 +1,67 @@
+﻿@using DTO
+@model List<Ferry>
+@{
+    ViewBag.Title = "Index";
+    
+    void Func() {
+
+    }
+}
+<style>
+    table, tr, th, td {
+        border: 2px solid black;
+        border-collapse: collapse;
+        padding: 4px;
+    }
+</style>
+<body style="max-width:900px; margin:auto;">
+    <h2>Ferries:</h2>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        @foreach (Ferry ferry in Model)
+        {
+            <div style="margin: 12px">
+                @ferry.name
+                <br/>
+                @Html.ListBox("box", ferry.passengers.ConvertAll(p =>
+                {
+                   return new SelectListItem()
+                   {
+                       Text = p.passengerID + " " + p.name + " " + p.sex
+                       
+                   };
+                }), new
+                {
+                    onchange = ""
+                })
+            </div>
+        }
+    </div>
+    <div>
+        @foreach (Ferry ferry in Model)
+        {
+            List<Car> cars = ferry.cars;
+            <h3>@ferry.name [@ferry.passengers.Count]</h3>
+            <select name="box" style="width:250px">
+                @foreach (Car car in cars)
+                {
+                    <option>@car.carID</option>
+                }
+            </select>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                </tr>
+                @foreach (Passenger passenger in ferry.passengers)
+                {
+                    <tr>
+                        <td>@passenger.name</td>
+                        <td>@passenger.sex</td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+    <h1>Ferries</h1>
+
+</body>
