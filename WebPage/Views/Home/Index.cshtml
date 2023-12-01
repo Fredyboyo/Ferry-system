@@ -1,0 +1,39 @@
+﻿@using DTO;
+@using WebPage.Models;
+@model IndexModel
+@{
+    ViewBag.Title = "Index";
+}
+<body style="max-width:1000px; margin:auto;">
+    <div>
+        <h2>Ferries:</h2>
+    </div>
+    <hr />
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        @for (int i = 0; i < Model.ferries.Count;i++)
+        {
+            <div style="padding: 6px; margin: 6px; border: 2px solid black; border-radius: 10px; width: 200px; ">
+                <div style="text-align: center;">
+                    <h3 style="margin:5px auto">@Model.ferries[i].name</h3>
+                </div>
+
+                <p style="margin: 5px;">Cars:</p>
+                @Html.ListBox("cars", Model.selectionListCars[i], new { style = "width: 200px;height: 100px;" })
+                <p style="margin: 5px">Passengers:</p>
+                @Html.ListBox("passengers", Model.selectionListPassengers[i], new { style = "width: 200px; height: 150px;" })
+                @using (Html.BeginForm("EditFerry", "Home", FormMethod.Get, new { style = "text-align: center" }))
+                {
+                    <input type="hidden" name="ferryID" value="@Model.ferries[i].ferryID" />
+                    <input type="submit" value="Edit" style="width: 150px; height: 30px; margin:10px;" />
+                }
+            </div>
+        }
+    <div style="padding: 6px; margin: 6px; border: 2px solid black; border-radius: 10px; width: 200px;">
+        <div style="text-align: center">Add new Ferry</div>
+        @using (Html.BeginForm("AddFerry", "Home", FormMethod.Post, new { style = "text-align: center" }))
+        {
+            <input type="text" value="Enter name..." name="ferryName" onfocus="this.value=''" style="width: 150px; height: 30px; margin:10px;" />
+        }
+    </div>
+    </div>
+</body>

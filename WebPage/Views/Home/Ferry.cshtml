@@ -1,0 +1,126 @@
+﻿@using DTO
+@using WebPage.Models
+@model FerryModel
+@{
+    ViewBag.Title = "Ferry";
+    <style>
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+    </style>
+}
+
+<body style="max-width:1000px; margin:auto;">
+    <div>
+        @using (Html.BeginForm("UpdateFerry", "Home", FormMethod.Post))
+        {
+            @Html.Hidden("ferryID", Model.ferry.ferryID)
+            <h2>@Html.EditorFor(m => m.ferry.name, new { htmlAttributes = new { Name = "name", Style = "font-size: 24px;" } })</h2>
+        }
+    </div>
+    <div style="display: flex; flex-direction: column ">
+        <div style="margin: 5px;">
+            <div style="height: 28px;">Passengers:</div>
+            <table>
+                <tr>
+                    <th>Passenger ID</th>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Car ID</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @for (var i = 0; i < Model.ferry.passengers.Count; i++)
+                {
+                    <tr>
+                        @using (Html.BeginForm("UpdatePassenger", "Home", FormMethod.Post))
+                        {
+                            <td>@Model.ferry.passengers[i].passengerID</td>
+                            <td>@Html.EditorFor(m => m.ferry.passengers[i].name, null, "name") </td>
+                            <td>@Html.DropDownListFor(m => m.ferry.passengers[i].sex, Model.passengerSexs[i], new { Name = "sex" })</td>
+                            <td>@Html.DropDownListFor(m => m.ferry.passengers[i].passengerID, Model.passengerCarIDs[i], new { Name = "carID" })</td>
+                            <td>
+                                @Html.Hidden("passengerID", Model.ferry.passengers[i].passengerID)
+                                @Html.Hidden("ferryID", Model.ferry.ferryID)
+                                <input type="submit" value="Update passenger" />
+                            </td>
+                        }
+                        @using (Html.BeginForm("DeletePassenger", "Home", FormMethod.Post))
+                        {
+                            <td>
+                                @Html.Hidden("passengerID", Model.ferry.passengers[i].passengerID)
+                                @Html.Hidden("ferryID", Model.ferry.ferryID)
+                                <input type="submit" value="Delete" />
+                            </td>
+                        }
+                    </tr>
+                }
+                @using (Html.BeginForm("AddPassenger", "Home", FormMethod.Post))
+                {
+                    <tr>
+                        <td></td>
+                        <td>@Html.EditorFor(m => m.newPassenger.name)</td>
+                        <td>@Html.EnumDropDownListFor(m => m.newPassenger.sex, new SelectList(Enum.GetValues(typeof(Sex)))) </td>
+                        <td>@Html.DropDownList("carID", Model.newPassengerCarID)</td>
+                        <td>
+                            @Html.Hidden("ferryID", Model.ferry.ferryID)
+                            <input type="submit" value="Add passenger" />
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="margin: 5px;">
+            <div style="height: 28px;">Car:</div>
+            <table>
+                <tr>
+                    <th>Car ID</th>
+                    <th></th>
+                </tr>
+                @for (var i = 0; i < Model.ferry.cars.Count; i++)
+                {
+                    <tr>
+                        @using (Html.BeginForm("UpdateCar", "Home", FormMethod.Post))
+                        {
+                            <td>
+                                @Model.ferry.cars[i].carID
+
+                                @Html.Hidden("carID", Model.ferry.cars[i].carID)
+                                @Html.Hidden("ferryID", Model.ferry.ferryID)
+                                <!--input type="submit" value="Update car" /-->
+                            </td>
+                        }
+                        @using (Html.BeginForm("DeleteCar", "Home", FormMethod.Post))
+                        {
+                            <td>
+                                @Html.Hidden("carID", Model.ferry.cars[i].carID)
+                                @Html.Hidden("ferryID", Model.ferry.ferryID)
+                                <input type="submit" value="Delete" />
+                            </td>
+                        }
+                    </tr>
+                }
+                @using (Html.BeginForm("AddCar", "Home", FormMethod.Post))
+                {
+                    <tr>
+                        <td>
+                            @Html.Hidden("ferryID", Model.ferry.ferryID)
+                            <input type="submit" value="Add car" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="margin: 5px;">
+            @using (Html.BeginForm("DeleteFerry", "Home", FormMethod.Post))
+            {
+                @Html.Hidden("ferryID", Model.ferry.ferryID)
+                <input type="submit" value="Delete ferry" />
+            }
+        </div>
+    </div>
+</body>

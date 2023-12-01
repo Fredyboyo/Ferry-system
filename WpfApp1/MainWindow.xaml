@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="LBFerries" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,61,0,0" SelectionChanged="ChoseFerry" HorizontalAlignment="Left" VerticalAlignment="Top" Height="176" Width="141"/>
+        <Label Content="Ferry Name:" HorizontalAlignment="Left" Margin="168,6,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TBFerryName" HorizontalAlignment="Left" Margin="247,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" KeyDown="UpdateFerry"/>
+        <Button x:Name="BTCreateFerry" Content="Create Ferry" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="141" Click="AddFerry"/>
+        <TextBox x:Name="TBNewFerryName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <ListBox x:Name="LBPassengers" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="168,61,0,0" Height="175" Width="232" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="PassengerSelected"/>
+        <ListBox x:Name="LBCars" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="431,63,0,0" Width="198" Height="176" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="CarSelected"/>
+        <Label Content="Passenger Name:" HorizontalAlignment="Left" Margin="161,274,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TBPassengerName" HorizontalAlignment="Left" Margin="267,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
+        <Label Content="Passenger Sex:" HorizontalAlignment="Left" Margin="161,300,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CBPassengerSex" HorizontalAlignment="Left" Margin="267,302,0,0" VerticalAlignment="Top" Width="133"/>
+        <Label Content="Passenger Car:" HorizontalAlignment="Left" Margin="161,327,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="CBPassengerCar" HorizontalAlignment="Left" Margin="267,329,0,0" VerticalAlignment="Top" Width="133"/>
+        <Button x:Name="BNewPassenger" Content="Create New Passenger" HorizontalAlignment="Left" Margin="168,249,0,0" VerticalAlignment="Top" Width="232" Click="AddPassenger"/>
+        <Button Content="Save Passenger" HorizontalAlignment="Left" Margin="168,358,0,0" VerticalAlignment="Top" Width="94" Click="UpdatePassenger"/>
+        <Button Content="Delete Ferry" HorizontalAlignment="Left" Margin="431,10,0,0" VerticalAlignment="Top" Click="DeleteFerry" Width="198"/>
+        <Label Content="Passengers:" HorizontalAlignment="Left" Margin="167,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.425" Width="233" FontWeight="Bold"/>
+        <Label Content="Cars:" HorizontalAlignment="Left" Margin="431,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.425" Width="199" FontWeight="Bold"/>
+        <Button x:Name="BNewCar" Content="Create New Car" HorizontalAlignment="Left" Margin="431,249,0,0" VerticalAlignment="Top" Width="198" Click="AddCar"/>
+        <Button Content="Delete Passenger" HorizontalAlignment="Left" Margin="267,358,0,0" VerticalAlignment="Top" Width="133" Click="DeletePassenger"/>
+        <Button Content="Delete Car" HorizontalAlignment="Left" Margin="431,277,0,0" VerticalAlignment="Top" Width="199" Click="DeleteCar"/>
+    </Grid>
+</Window>
