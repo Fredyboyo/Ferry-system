@@ -27,6 +27,7 @@ namespace Model
             this.cars = cars;
             this.passengers = passengers;
         }
+
         public void AddCar(Car car)
         {
             cars.Add(car);
